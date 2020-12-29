@@ -1,16 +1,9 @@
 #include <iostream>
-#include <exception>
 
 using namespace std;
 
 int num1;
 int num2;
-
-struct ZeroException : public std::exception {
-	const char * what () const throw () {
-    	return "Zero Exception";
-    }
-};
 
 void opener() {
     cout << "Welcome to the Euclidean Algorithm Generator!" << endl;
