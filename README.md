@@ -14,13 +14,15 @@ Since the remainder in step 4 is zero, the greatest common divisor of 351 and 13
 ## Implementing the Euclidean Algorithm
 According to an article from the [Massachusetts Institute of Technology](http://web.mit.edu/6.857/OldStuff/Fall02/handouts/L07-generators.pdf)
 the Euclidean Algorithm is implemented as below:\
-Assuming a >= 0 and b >= 0\
+Assuming `a >= 0` and `b >= 0`
 ```
 if b = 0
    gcd(a,b) = a
 else
    gcd(a,b) = gcd(b, a % b)
 ```
-
+The Euclidean Algorithm in this program was implemented recursively such that when the remainder `a % b`\
+is zero, the base case is fulfilled and the program ends. The Euclidean Algorithm will never run indefinitey\
+because `a % b < b` is always true.
 
 
