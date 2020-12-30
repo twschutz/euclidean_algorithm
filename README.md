@@ -12,7 +12,7 @@ Find the greatest common divisor (gcd) of 351 and 135
   4. gcd(54, 27) = 54 - 2 * 27 + 0\
 Since the remainder in step 4 is zero, the greatest common divisor of 351 and 135 is 27!
 ## Implementing the Euclidean Algorithm
-According to an article from the [Massachusetts Institute of Technology](http://web.mit.edu/6.857/OldStuff/Fall02/handouts/L07-generators.pdf)
+According to a lecture from the [Massachusetts Institute of Technology](http://web.mit.edu/6.857/OldStuff/Fall02/handouts/L07-generators.pdf)
 the Euclidean Algorithm is implemented as below:\
 Assuming `a >= 0` and `b >= 0`
 ```
