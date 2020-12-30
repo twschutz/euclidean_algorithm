@@ -25,5 +25,8 @@ else
 The Euclidean Algorithm in this program was implemented recursively such that when the remainder `a % b`\
 is zero, the base case is fulfilled and the program ends. The Euclidean Algorithm will never run indefinitey\
 because `a % b < b` is always true.
+## Running the Euclidean Algorithm
+You can run the Euclidean Algorithm Calculator by running the executable using\
+`./eu2.exe`
 
 
