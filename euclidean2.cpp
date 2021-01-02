@@ -7,9 +7,13 @@ using namespace std;
 
 int num1;
 int num2;
+int counter = 0;
 string ext;
 bool extended;
 vector<int> nums;
+vector<string> replacements;
+vector<int> multVec;
+ostringstream oss;
 
 //REQUIRES: None
 //MODIFIES: num1, num2
@@ -20,7 +24,6 @@ void opener() {
     cin >> num1;
     cout << "Please enter the second number you would like to find the greatest common denomiator of: ";
     cin >> num2;
-    cout << endl;
     cout << "Use the Extended Euclidean Algorithm to find the linear combination of " << num1 
     << " and " << num2 << "? (True or False)" << endl;
     cin >> ext;
@@ -50,37 +53,44 @@ int findGcd(int num_in1, int num_in2) {
     return findGcd(num_in2, (num_in1 % num_in2));
 }
 
-/*int multFinder(ostringstream &oss_in, int int_in) {
+/*int multFinder(string &string_in, int int_in) {
     int count = 0;
     string toBeFound = to_string(int_in);
-    string oStr = oss_in.str();
     const char* cStr2 = toBeFound.c_str();
-    const char* cStr = oStr.c_str();
+    const char* cStr = string_in.c_str();
     for(const char* i = cStr; *i != '\0'; ++i) {
         if(*i == cStr2[0] && cStr2[1]) {
             if(*(i + 1) == cStr2[1]) {
+                count += multVec.at(counter);
                 if(*(i - 2) == '*') {
-                    count += *(i - 4);
-                    cout << "Adding " << *(i - 4) << " to count" << endl;
-                }
-                else {
-                    count += 1;
+                    count += (multVec.at(counter) * stoi(i - 4)) - (multVec.at(counter) - 1);
                 }
             }
         }
-        if(*i == cStr2[0] && !cStr2[1]) {
-            count += 1;
+        else if(*i == cStr2[0] && !cStr2[1]) {
+            count += multVec.at(counter);
+            if(*(i - 2) == '*') {
+                count += (multVec.at(counter) * stoi(i - 4)) - multVec.at(counter);
+            }
         }
     }
     return count;
+}*/
+
+void printEquals() {
+    for(int j = (int) nums.size() - 2; j > 0; --j) {
+        int mult = (nums.at(j - 1) - (nums.at(j - 1) % nums.at(j)))/nums.at(j);
+        cout << nums.at(j + 1) << " = " << nums.at(j - 1) << " - " << mult << " * " << nums.at(j) << endl;
+        oss << nums.at(j - 1) << " - " << mult << " * " << nums.at(j) << endl;
+        replacements.push_back(oss.str());
+        multVec.push_back(mult);
+        oss.str("");
+    }
 }
 
-void findSub(int curr) {
+/*void factor() {
     ostringstream oss;
     ostringstream oss2;
-    int counter = 0;
-    vector<string> ossVec;
-    vector<int> multVec;
 
     for(int j = (int) nums.size() - 2; j > 0; --j) {
         int mult = (nums.at(j - 1) - (nums.at(j - 1) % nums.at(j)))/nums.at(j);
@@ -90,28 +100,34 @@ void findSub(int curr) {
         multVec.push_back(mult);
         oss.str("");
     }
-    for(int j = (int) nums.size() - 2; j > 0; --j) {
+
+    for(int j = (int) nums.size() - 2; j > 1; --j) {
         if(counter % 2 == 0) {
             cout << "Even" << endl;
-            cout << nums.at(nums.size() - 1) << " = " << nums.at(j - 1) << " - " << multVec.at(counter) << ossVec.at(counter + 1) << endl;
-            oss2 << nums.at(nums.size() - 1) << " = " << nums.at(j - 1) << " - " << multVec.at(counter) << ossVec.at(counter + 1);
-            cout << multFinder(oss2, 9) << " " << multFinder(oss2, 24) << endl;
+            cout << nums.at(nums.size() - 1) << " = " << nums.at(j - 1) << " - " << multVec.at(counter) << ossVec.at(counter + 1);
+            oss2.str("");
+            oss2 << nums.at(j - 1) << " - " << multVec.at(counter) << ossVec.at(counter + 1);
+            cout << " = " << multFinder(oss2, nums.at(j - 1)) << " * " << nums.at(j - 1) 
+            << " - " << multFinder(oss2, nums.at(j - 2)) << " * " <<  nums.at(j - 2) << endl;
+            oss2 << multFinder(oss2, nums.at(j - 1)) << " * " << nums.at(j - 1) 
+            << " - " << multFinder(oss2, nums.at(j - 2)) << " * " <<  nums.at(j - 2);
+            multVec.at(counter + 1) = multFinder(oss2, nums.at(j - 1));
         }
         else {
             cout << "Odd" << endl;
-            cout << nums.at(nums.size() - 1) << " = " << endl;
+            cout << oss2.str() << endl;
+            cout << nums.at(nums.size() - 1) << " = " << multVec.at(counter) << ossVec.at(counter + 1) << " - " << nums.at(j - 1);
+            oss2.str("");
+            oss2 << multVec.at(counter) << ossVec.at(counter + 1) << " - " << nums.at(j - 1);
+            cout << " = " << multFinder(oss2, nums.at(j - 2)) << " * " << nums.at(j - 2) 
+            << " - " << multFinder(oss2, nums.at(j - 1)) << " * " <<  nums.at(j - 1) << endl;
+            oss << multFinder(oss2, nums.at(j - 2)) << " * " << nums.at(j - 2) 
+            << " - " << multFinder(oss2, nums.at(j - 1)) << " * " <<  nums.at(j - 1);
+            multVec.at(counter + 1) = multFinder(oss2, nums.at(j - 2));
         }
         ++counter;
     }
 }*/
-
-void findEEA() {
-    int counter = 0;
-    if(counter % 2 == 0) { 
-    }
-    else {
-    }
-}
 
 int main() {
     opener();
@@ -122,8 +138,7 @@ int main() {
     int gcd = findGcd(num1, num2);
     cout << "The greatest common denominator is " << gcd << "!" << endl;
     if(extended) {
-        findEEA();
-        //findSub(9);
+        //printEquals();
     }
     return 0;
 }
