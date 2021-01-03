@@ -27,6 +27,6 @@ is zero, the base case is fulfilled and the program ends. The Euclidean Algorith
 because `a % b < b` is always true.
 ## Running the Euclidean Algorithm
 You can run the Euclidean Algorithm Calculator by running the executable using\
-`./eu2.exe`
+`./euclidean2.exe` after cloning the repository and moving to the correct working directory.
 
 
